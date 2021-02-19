@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'widget/convert.dart';
-import 'widget/input.dart';
-import 'widget/result.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,18 +26,58 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Input(),
+              TextFormField(
+                decoration:
+                    InputDecoration(hintText: "Masukkan Suhu Dalam Celcius"),
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                keyboardType: TextInputType.number,
+              ),
               Container(
                 margin: EdgeInsets.only(top: 20, bottom: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Result(),
-                    Result(),
+                    Container(
+                      child: Column(
+                        children: [
+                          Text("Suhu dalam Kelvin"),
+                          Container(
+                            margin: EdgeInsets.only(top: 20, bottom: 20),
+                            child: Text(
+                              "150",
+                              style: TextStyle(fontSize: 36),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        children: [
+                          Text("Suhu dalam Reamor"),
+                          Container(
+                            margin: EdgeInsets.only(top: 20, bottom: 20),
+                            child: Text(
+                              "200",
+                              style: TextStyle(fontSize: 36),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Convert(),
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: RaisedButton(
+                  onPressed: () {},
+                  color: Colors.blueAccent,
+                  textColor: Colors.white,
+                  child: Text("Konversi Suhu"),
+                ),
+              ),
             ],
           ),
         ),
