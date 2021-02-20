@@ -1,5 +1,7 @@
+import 'package:converter/widget/convert.dart';
 import 'package:flutter/material.dart';
 import 'package:converter/widget/input.dart';
+import 'package:converter/widget/result.dart';
 
 void main() {
   runApp(MyApp());
@@ -53,61 +55,22 @@ class _MyAppState extends State<MyApp> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text("Kelvin"),
-                          Container(
-                            margin: EdgeInsets.only(top: 20, bottom: 20),
-                            child: Text(
-                              _kelvin.toStringAsFixed(2),
-                              style: TextStyle(fontSize: 36),
-                            ),
-                          ),
-                        ],
-                      ),
+                    Result(
+                      result: _kelvin,
+                      name: "Kelvin",
                     ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text("Reamur"),
-                          Container(
-                            margin: EdgeInsets.only(top: 20, bottom: 20),
-                            child: Text(
-                              _reamur.toStringAsFixed(2),
-                              style: TextStyle(fontSize: 36),
-                            ),
-                          ),
-                        ],
-                      ),
+                    Result(
+                      result: _reamur,
+                      name: "Reamur",
                     ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text("Fahrenheit"),
-                          Container(
-                            margin: EdgeInsets.only(top: 20, bottom: 20),
-                            child: Text(
-                              _fahrenheit.toStringAsFixed(2),
-                              style: TextStyle(fontSize: 36),
-                            ),
-                          ),
-                        ],
-                      ),
+                    Result(
+                      result: _fahrenheit,
+                      name: "Fahrenheit",
                     ),
                   ],
                 ),
               ),
-              Container(
-                width: double.infinity,
-                height: 50,
-                child: RaisedButton(
-                  onPressed: _konversiSuhu,
-                  color: Colors.blueAccent,
-                  textColor: Colors.white,
-                  child: Text("Konversi Suhu"),
-                ),
-              ),
+              Convert(konvertHandler: _konversiSuhu),
             ],
           ),
         ),
