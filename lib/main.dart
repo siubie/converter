@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:converter/widget/input.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,13 +47,7 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
             children: [
-              TextFormField(
-                decoration:
-                    InputDecoration(hintText: "Masukkan Suhu Dalam Celcius"),
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                controller: etInput,
-                keyboardType: TextInputType.number,
-              ),
+              Input(etInput: etInput),
               Container(
                 margin: EdgeInsets.only(top: 20, bottom: 20),
                 child: Row(
