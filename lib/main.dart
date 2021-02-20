@@ -5,8 +5,29 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // text controller
+  TextEditingController etInput = new TextEditingController();
+  //variabel berubah
+  double _inputUser = 0;
+  double _kelvin = 0;
+  double _reamur = 0;
+  double _fahrenheit = 0;
+
+  _konversiSuhu() {
+    setState(() {
+      _inputUser = double.parse(etInput.text);
+      _reamur = 4 / 5 * _inputUser;
+      _fahrenheit = 9 / 5 * _inputUser + 32;
+      _kelvin = _inputUser + 273;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,6 +51,7 @@ class MyApp extends StatelessWidget {
                 decoration:
                     InputDecoration(hintText: "Masukkan Suhu Dalam Celcius"),
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                controller: etInput,
                 keyboardType: TextInputType.number,
               ),
               Container(
@@ -37,28 +59,42 @@ class MyApp extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
+                    Expanded(
                       child: Column(
                         children: [
-                          Text("Suhu dalam Kelvin"),
+                          Text("Kelvin"),
                           Container(
                             margin: EdgeInsets.only(top: 20, bottom: 20),
                             child: Text(
-                              "150",
+                              _kelvin.toStringAsFixed(2),
                               style: TextStyle(fontSize: 36),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    Container(
+                    Expanded(
                       child: Column(
                         children: [
-                          Text("Suhu dalam Reamor"),
+                          Text("Reamur"),
                           Container(
                             margin: EdgeInsets.only(top: 20, bottom: 20),
                             child: Text(
-                              "200",
+                              _reamur.toStringAsFixed(2),
+                              style: TextStyle(fontSize: 36),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text("Fahrenheit"),
+                          Container(
+                            margin: EdgeInsets.only(top: 20, bottom: 20),
+                            child: Text(
+                              _fahrenheit.toStringAsFixed(2),
                               style: TextStyle(fontSize: 36),
                             ),
                           ),
@@ -72,7 +108,7 @@ class MyApp extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: _konversiSuhu,
                   color: Colors.blueAccent,
                   textColor: Colors.white,
                   child: Text("Konversi Suhu"),
